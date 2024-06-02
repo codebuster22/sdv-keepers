@@ -1,6 +1,11 @@
 import { signMintRequest } from './eip712.js';
 import dotenv from "dotenv";
 dotenv.config({});
+import {decryptEnvVar} from "./kms.js";
+
+// Call decryptEnvVar outside the handler, at the top-level, 
+// so that these are decrypted once per container.
+await decryptEnvVar("PRIVATE_KEY");
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const CHAIN_ID = parseInt(process.env.CHAIN_ID, 10);
