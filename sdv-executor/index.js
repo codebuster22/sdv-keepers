@@ -1,13 +1,13 @@
-import {updateTierId} from "./updateTierId";
+import {updateTierId} from "./updateTierId.js";
 
-exports.handler = async (event) => {
+async function handler (event) {
     try {
-        const { tokenId, tierId } = JSON.parse(event.body || '{}');
+        const { tokenId, tierId } = event;
 
         if (tokenId === undefined || tierId === undefined) {
             return {
                 statusCode: 400,
-                body: JSON.stringify({ error: 'tokenId and tierId are required' }),
+                error: 'tokenId and tierId are required' ,
             };
         }
 
@@ -15,13 +15,16 @@ exports.handler = async (event) => {
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ txHash }),
+            transactionHash: { txHash },
         };
     } catch (error) {
         console.error('Error updating tier ID:', error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: 'Internal Server Error' }),
+            error: 'Internal Server Error',
+            errorBody: error
         };
     }
 };
+
+export {handler};

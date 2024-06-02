@@ -1,14 +1,15 @@
-import {ethers} from "ethers";
+import {JsonRpcProvider, ethers} from "ethers";
+import dotenv from "dotenv";
+dotenv.config({});
 
 const providerUrl = process.env.ETH_PROVIDER_URL;
 const privateKey = process.env.PRIVATE_KEY;
 const contractAddress = process.env.CONTRACT_ADDRESS;
 const contractABI = [
-    // Replace this with your contract's ABI
-    "function updateTierId(uint256 _tokenId, uint256 _tierId) public onlyRole(bytes32 role)"
+    {"type":"function","name":"updateTierId","inputs":[{"name":"_tokenId","type":"uint256","internalType":"uint256"},{"name":"_tierId","type":"uint256","internalType":"uint256"}],"outputs":[],"stateMutability":"nonpayable"}
 ];
 
-const provider = new ethers.providers.JsonRpcProvider(providerUrl);
+const provider = new JsonRpcProvider(providerUrl);
 const wallet = new ethers.Wallet(privateKey, provider);
 const contract = new ethers.Contract(contractAddress, contractABI, wallet);
 
