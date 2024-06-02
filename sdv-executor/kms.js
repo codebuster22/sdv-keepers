@@ -11,9 +11,9 @@ async function decryptEnvVar(name) {
         };
         const command = new DecryptCommand(req);
         const response = await client.send(command);
-        const decrypted = new TextDecoder().decode(response.Plaintext);
+        const decryptedValue = new TextDecoder().decode(response.Plaintext);
 
-        process.env[name] = decrypted;
+        process.env[name] = decryptedValue;
         return decryptedValue;
     } catch (err) {
         console.log('Decrypt error:', err);

@@ -1,6 +1,11 @@
 import {JsonRpcProvider, ethers} from "ethers";
 import dotenv from "dotenv";
 dotenv.config({});
+import {decryptEnvVar} from "./kms.js";
+
+// Call decryptEnvVar outside the handler, at the top-level, 
+// so that these are decrypted once per container.
+await decryptEnvVar("PRIVATE_KEY");
 
 const providerUrl = process.env.ETH_PROVIDER_URL;
 const privateKey = process.env.PRIVATE_KEY;

@@ -1,9 +1,4 @@
 import {updateTierId} from "./updateTierId.js";
-import {decryptEnvVar} from "./kms.js";
-
-// Call decryptEnvVar outside the handler, at the top-level, 
-// so that these are decrypted once per container.
-await decryptEnvVar("PRIVATE_KEY");
 
 async function handler (event) {
     try {
@@ -20,7 +15,7 @@ async function handler (event) {
 
         return {
             statusCode: 200,
-            transactionHash: { txHash },
+            transactionHash: txHash,
         };
     } catch (error) {
         console.error('Error updating tier ID:', error);
