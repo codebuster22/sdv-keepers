@@ -1,6 +1,6 @@
 import { KMSClient, DecryptCommand } from "@aws-sdk/client-kms"; // ES Modules import
 
-const client = new KMSClient({region: 'ap-south-1'});
+const client = new KMSClient({region: process.env.AWS_DEFAULT_REGION});
 
 async function decryptEnvVar(name) {
     try {

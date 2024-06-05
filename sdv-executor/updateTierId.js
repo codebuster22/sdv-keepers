@@ -20,6 +20,6 @@ const contract = new ethers.Contract(contractAddress, contractABI, wallet);
 
 export async function updateTierId(tokenId, tierId) {
     const tx = await contract.updateTierId(tokenId, tierId);
-    await tx.wait(); // Wait for the transaction to be mined
+    // await tx.wait(); // Wait for the transaction to be mined
     return tx.hash; // Return the transaction hash
 }
